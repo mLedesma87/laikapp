@@ -33,8 +33,8 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.spinnerDialog.show();
-    this.currentMax = moment().format('YYYY-MM-DD');
-    this.apodNasaProvider.getApod2()
+    //this.currentMax = moment().format('YYYY-MM-DD');
+    this.apodNasaProvider.getApodData()
     .then(data => {
       this.getApodData(data);
       this.splashScreen.hide();
@@ -86,34 +86,29 @@ export class HomePage {
     this.date = '';
     this.description = '';
     this.spinnerDialog.show();
-    this.apodNasaProvider.getApodDate(this.dateSelected)
+    this.apodNasaProvider.getApodByDate(this.dateSelected)
     .then(data => {
       this.getApodData(data);
     });
   }
 
   addToFavorites() {
-    this.isFavorite = this.isFavorite ? false : true;
+    this.isFavorite = !this.isFavorite;
     if (this.isFavorite) this.arrFav.push(this.infoApod);
   }
 
   ionViewDidLeave() {
   	if (this.arrFav.length > 0) {
   	  	this.storage.get('fav').then((favData) => {
-  	  		if (favData === null){
-  	  		  this.storage.set('fav', this.arrFav).then(()=>{
-  	  		  	this.events.publish('fav:add');
-  	  		  	console.log('publicado');
-  	  		  });
-  	  		} else {
-    	  		  for (let fav of favData) {
-    	  		    this.arrFav.push(fav);
-    	  		  }
-    	  		  this.storage.set('fav', this.arrFav).then(()=>{
-    	  		  	this.events.publish('fav:add');
-    	  		  	console.log('publicado');
-    	  		  });
-    	  		} 		
+  	  		
+          if (favData !== null) {
+            for (let fav of favData) {
+              this.arrFav.push(fav);
+            }
+          }
+          this.storage.set('fav', this.arrFav).then(()=>{
+            this.events.publish('fav:add');
+          });
   	  	});
   	}
   }
