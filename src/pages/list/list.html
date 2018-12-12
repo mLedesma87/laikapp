@@ -3,21 +3,16 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Laikapp</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+<ion-content class="card-background-page">
+  <h1 text-center>Favourites</h1>
+  <ion-card *ngFor="let fav of arrFav">
+    <img-loader id="{{fav.date}}" src="{{fav.url}}" useImg>
+      <button item-right clear (click)='rmFavorite($event)'>
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </img-loader>    
+  </ion-card>
 </ion-content>

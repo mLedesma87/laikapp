@@ -1,37 +1,55 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { ApodData } from '../../providers/apod-nasa/apod-nasa';
+
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  arrFav: Array<ApodData> = [];
+  arrFavDel: Array<ApodData> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public storage:Storage, public spinnerDialog:SpinnerDialog, public events: Events,public imgLoader:IonicImageLoader) {
+          
+          this.spinnerDialog.show();
+          this.storage.get('fav').then((favData) => {
+            this.arrFav = favData;
+            this.spinnerDialog.hide();   
+          });
   }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ListPage, {
-      item: item
+  ionViewDidLoad() {
+    this.events.subscribe('fav:add', () => {
+      this.spinnerDialog.show();
+      this.storage.get('fav').then((favData) => {
+        console.log('new added');
+        this.arrFav = favData;
+        this.spinnerDialog.hide();    
+      });
+    });
+  }
+
+  rmFavorite(itmCliked) {
+    var idRm = itmCliked.originalTarget.parentNode.id;
+    let arrFavDel: Array<ApodData> = [];
+    let arrFavorites = this.arrFav;
+
+    for (let infoFav of arrFavorites) {
+      if (infoFav.date !== idRm) {
+        arrFavDel.push(infoFav);
+      }
+    }
+
+    this.arrFav = arrFavDel;
+    this.storage.set('fav', this.arrFav).then(()=>{
+      console.log('publicado');
     });
   }
 }

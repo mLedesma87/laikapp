@@ -1,3 +1,20 @@
 page-home {
+	ion-col ion-fab {
+		position:relative;
+		float:right;
+	}
 
+	ion-img {
+		background: none;
+	}
+
+	.item-cover {
+		border: 1px solid;
+		border-radius: 5px;
+	}
+
+	.item-datetime .label-md{
+		color: color($colors, primary);
+		font-weight: bold;
+	}
 }

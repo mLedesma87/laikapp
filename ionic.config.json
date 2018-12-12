@@ -1,6 +1,6 @@
 {
   "name": "laikapp",
-  "app_id": "",
+  "app_id": "1e5abc84",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
