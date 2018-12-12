@@ -17,7 +17,6 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public storage:Storage, public spinnerDialog:SpinnerDialog, public events: Events,public imgLoader:IonicImageLoader) {
-          
           this.spinnerDialog.show();
           this.storage.get('fav').then((favData) => {
             this.arrFav = favData;
@@ -29,14 +28,13 @@ export class ListPage {
     this.events.subscribe('fav:add', () => {
       this.spinnerDialog.show();
       this.storage.get('fav').then((favData) => {
-        console.log('new added');
         this.arrFav = favData;
         this.spinnerDialog.hide();    
       });
     });
   }
 
-  rmFavorite(itmCliked) {
+  deleteFavourite(itmCliked) {
     var idRm = itmCliked.originalTarget.parentNode.id;
     let arrFavDel: Array<ApodData> = [];
     let arrFavorites = this.arrFav;
@@ -48,8 +46,6 @@ export class ListPage {
     }
 
     this.arrFav = arrFavDel;
-    this.storage.set('fav', this.arrFav).then(()=>{
-      console.log('publicado');
-    });
+    this.storage.set('fav', this.arrFav);
   }
 }

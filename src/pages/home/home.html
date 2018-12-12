@@ -6,7 +6,6 @@
     <ion-title>Laikapp</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
   <ion-grid>
       <ion-row>
@@ -16,7 +15,7 @@
       </ion-row>
       <ion-row>
           <ion-col col-12>
-            <img-loader src="{{imgUrl}}" useImg></img-loader>
+            <img-loader src="{{infoApod?.url}}" useImg></img-loader>
           </ion-col>
           <ion-col col-12>
               <ion-fab right >
@@ -24,9 +23,9 @@
               </ion-fab>
           </ion-col>
           <ion-col col-12>
-              <h3 text-center>{{title}}</h3>
-              <p>{{description}}
-              <p>{{date}}</p>  
+              <h3 text-center>{{infoApod?.title}}</h3>
+              <p>{{infoApod?.explanation}}
+              <p>{{infoApod?.date}}</p>  
           </ion-col>
       </ion-row>
   </ion-grid>

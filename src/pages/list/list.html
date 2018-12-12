@@ -10,7 +10,7 @@
   <h1 text-center>Favourites</h1>
   <ion-card *ngFor="let fav of arrFav">
     <img-loader id="{{fav.date}}" src="{{fav.url}}" useImg>
-      <button item-right clear (click)='rmFavorite($event)'>
+      <button item-right clear (click)='deleteFavourite($event)'>
         <ion-icon name="close-circle"></ion-icon>
       </button>
     </img-loader>    

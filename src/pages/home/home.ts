@@ -13,15 +13,9 @@ import moment from 'moment';
   templateUrl: 'home.html',
 })
 export class HomePage {
-
-  imgUrl;
-  title;
-  date;
-  description;
-  dateSelected;
-  infoApod;
-  dataFav;
-  isFavorite = false;
+  dateSelected:string;
+  infoApod:ApodData;
+  isFavorite:boolean = false;
   currentMax:string;
   arrFav: Array<ApodData> = [];
  
@@ -33,7 +27,6 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.spinnerDialog.show();
-    //this.currentMax = moment().format('YYYY-MM-DD');
     this.apodNasaProvider.getApodData()
     .then(data => {
       this.getApodData(data);
@@ -55,10 +48,6 @@ export class HomePage {
 	    //document.getElementById('videoContainer').appendChild( iframe );
   	} else {
   	  this.infoApod = response;
-	    this.imgUrl = response.url;
-      this.title = response.title;
-      this.date = response.date;
-      this.description = response.explanation;
   	}
 
   	this.storage.get('fav').then((favData) => {
@@ -71,7 +60,7 @@ export class HomePage {
   	  }
   	  if (this.arrFav.length > 0) {
     		for (let fav of this.arrFav) {
-    		  if (fav.date === this.date) {
+    		  if (fav.date === this.infoApod.date) {
     		    this.isFavorite = true;
     		  }
     		}
@@ -81,10 +70,7 @@ export class HomePage {
   }
 
   dateChange(){
-    this.imgUrl = '';
-    this.title = '';
-    this.date = '';
-    this.description = '';
+    this.infoApod = undefined;
     this.spinnerDialog.show();
     this.apodNasaProvider.getApodByDate(this.dateSelected)
     .then(data => {
