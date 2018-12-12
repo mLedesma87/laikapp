@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="card-background-page">
-  <h1 text-center>Favourites</h1>
+  <h1 text-center>FAVOURITES</h1>
   <ion-card *ngFor="let fav of arrFav">
     <img-loader id="{{fav.date}}" src="{{fav.url}}" useImg>
       <button item-right clear (click)='deleteFavourite($event)'>

@@ -10,12 +10,13 @@
   <ion-grid>
       <ion-row>
           <ion-col col-12>
-            <h1 text-center>Astronomic Picture Of the Day</h1>
+            <h1 text-center>ASTRONOMIC PICTURE OF THE DAY</h1>
           </ion-col>
       </ion-row>
       <ion-row>
           <ion-col col-12>
             <img-loader src="{{infoApod?.url}}" useImg></img-loader>
+            <ion-label>Image Credit & Copyright: {{infoApod?.copyright}}</ion-label>
           </ion-col>
           <ion-col col-12>
               <ion-fab right >
