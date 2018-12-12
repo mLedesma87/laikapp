@@ -35,7 +35,14 @@ export class ListPage {
   }
 
   deleteFavourite(itmCliked) {
-    var idRm = itmCliked.originalTarget.parentNode.id;
+    let idRm:string;
+    
+    if (itmCliked.target.parentElement.parentElement.id != '') {
+      idRm = itmCliked.target.parentElement.parentElement.id;
+    } else {
+      idRm = itmCliked.target.parentElement.id;
+    }
+    
     let arrFavDel: Array<ApodData> = [];
     let arrFavorites = this.arrFav;
 

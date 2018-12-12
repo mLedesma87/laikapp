@@ -10,8 +10,9 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { IonicImageLoader } from 'ionic-image-loader';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { IonicImageLoader } from 'ionic-image-loader';
+
 import { ApodNasaProvider } from '../providers/apod-nasa/apod-nasa';
 
 @NgModule({
