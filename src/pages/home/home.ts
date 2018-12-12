@@ -17,6 +17,7 @@ export class HomePage {
   infoApod:ApodData;
   isFavorite:boolean = false;
   currentMax:string;
+  copyrightInfo:boolean;
   arrFav: Array<ApodData> = [];
  
   constructor(public navCtrl: NavController, public apodNasaProvider:ApodNasaProvider, public imgLoader:IonicImageLoader, 
@@ -48,6 +49,7 @@ export class HomePage {
 	    //document.getElementById('videoContainer').appendChild( iframe );
   	} else {
   	  this.infoApod = response;
+      this.copyrightInfo = response.copyright != undefined;
   	}
 
   	this.storage.get('fav').then((favData) => {
