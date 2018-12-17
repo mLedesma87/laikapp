@@ -50,10 +50,6 @@ export class ApodNasaProvider {
     });
   }
 
-  getDate() {
-    return this.lastDate;
-  }
-
   setDate(date:string) {
     this.lastDate = date;
   }
