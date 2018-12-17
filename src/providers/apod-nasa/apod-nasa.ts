@@ -18,6 +18,7 @@ export class ApodNasaProvider {
 	apiKey:string = '9OnoQD9of0VPbNmGrCdMGGCLP1ADpx1GIqfSZ2R6';
 	url:string;
   apodData;
+  lastDate:string;
 
   constructor(public http: HttpClient) {
     this.url = 'https://api.nasa.gov/planetary/apod?api_key=' + this.apiKey;
@@ -38,9 +39,9 @@ export class ApodNasaProvider {
     }
   }
 
-  getApodByDate(date) {
+  getApodByDate() {
     return new Promise(resolve => {
-      this.http.get(this.url + '&date=' +date).subscribe(data => {
+      this.http.get(this.url + '&date=' +this.lastDate).subscribe(data => {
         this.apodData = data;
         resolve(data);
       }, err => {
@@ -48,4 +49,13 @@ export class ApodNasaProvider {
       });
     });
   }
+
+  getDate() {
+    return this.lastDate;
+  }
+
+  setDate(date:string) {
+    this.lastDate = date;
+  }
+
 }

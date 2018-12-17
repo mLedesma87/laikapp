@@ -74,7 +74,8 @@ export class HomePage {
   dateChange(){
     this.infoApod = undefined;
     this.spinnerDialog.show();
-    this.apodNasaProvider.getApodByDate(this.dateSelected)
+    this.apodNasaProvider.setDate(this.dateSelected);
+    this.apodNasaProvider.getApodByDate()
     .then(data => {
       this.getApodData(data);
     });
