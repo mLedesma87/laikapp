@@ -29,4 +29,11 @@ page-home {
 		color: color($colors, primary);
 		font-weight: bold;
 	}
+
+	.play-icon {
+		position: absolute;
+		left: 40%;
+		top: 35%;
+		width: 20%;
+	}
 }

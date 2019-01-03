@@ -11,9 +11,11 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { IonicImageLoader } from 'ionic-image-loader';
 
 import { ApodNasaProvider } from '../providers/apod-nasa/apod-nasa';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ApodNasaProvider } from '../providers/apod-nasa/apod-nasa';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SpinnerDialog,
-    ApodNasaProvider
+    PhotoViewer,
+    ApodNasaProvider,
+    YoutubeVideoPlayer
   ]
 })
 export class AppModule {}
